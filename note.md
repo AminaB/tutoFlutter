@@ -25,3 +25,13 @@ A body can take only one widget, but we can use column widget ( lists of widgets
 - RaisedButton -> ElevatedButton
 - FlatButton -> TextButton
 - OutlineButton -> OutlinedButton
+
+## In addition, the following resources might be helpful:
+
+    Official Docs: https://flutter.dev/docs
+
+    Widget Catalog: https://flutter.dev/docs/development/ui/widgets
+
+    Dart Docs: https://dart.dev/guides/language/language-tour
+
+    "Introduction to Widgets" - Official Docs: https://flutter.dev/docs/development/ui/widgets-intro
