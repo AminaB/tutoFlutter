@@ -16,3 +16,5 @@ A body can take only one widget, but we can use column widget ( lists of widgets
 
 - we have Margin (outside the border), Border, padding(between child and border), and child(content)
 - use VoidCallback, if the function do not have input and return nothing
+
+- the (...) infront of list, pull all the values out of it (we cand add directly values of the list to other list)
