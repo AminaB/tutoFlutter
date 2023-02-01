@@ -46,11 +46,11 @@ class _MyappState extends State<Myapp> {
         appBar: AppBar(
           title: Text('My first app'),
         ),
-        body: Column(children: [
-          Question((quetions[_questionIndex%quetions.length]['questionText']) as String),
-          ...((quetions[_questionIndex%quetions.length]['answers']) as List<String>).map((answer) => Answer(answerQuestion,answer)).toList()
+        body: _questionIndex<quetions.length ? Column(children: [
+          Question((quetions[_questionIndex]['questionText']) as String),
+          ...((quetions[_questionIndex]['answers']) as List<String>).map((answer) => Answer(answerQuestion,answer)).toList()
 
-        ]), //
+        ]):Center(child: Text('End'),), //
       ),
     );
   }
