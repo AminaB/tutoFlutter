@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tuto_flutter/Answer.dart';
+import 'package:tuto_flutter/QuestionWidget.dart';
 
 import 'Question.dart';
 
@@ -16,7 +17,7 @@ class Myapp extends StatefulWidget {
 }
 
 class _MyappState extends State<Myapp> {
-  final quetions = [
+  final _quetions = [
     {
       'questionText': 'Your color',
       'answers': ['Black', 'Red', 'Green', 'White']
@@ -32,7 +33,7 @@ class _MyappState extends State<Myapp> {
   ];
   int _questionIndex = 0;
 
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -40,17 +41,16 @@ class _MyappState extends State<Myapp> {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('My first app'),
         ),
-        body: _questionIndex<quetions.length ? Column(children: [
-          Question((quetions[_questionIndex]['questionText']) as String),
-          ...((quetions[_questionIndex]['answers']) as List<String>).map((answer) => Answer(answerQuestion,answer)).toList()
-
-        ]):Center(child: Text('End'),), //
+        body: _questionIndex < _quetions.length
+            ? QuestionWidget(_quetions, _answerQuestion, _questionIndex)
+            : Center(
+                child: Text('End'),
+              ), //
       ),
     );
   }
