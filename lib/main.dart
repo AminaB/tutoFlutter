@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'transaction.dart';
 
@@ -51,7 +52,7 @@ final List<Transaction> transactions=[
                     margin: EdgeInsets.symmetric(vertical: 10,horizontal: 15),
                     decoration: BoxDecoration(border:Border.all(color: Colors.purple,width: 2)),
                     padding: EdgeInsets.all(10),
-                    child: Text(e.amount.toString(),
+                    child: Text('£' + e.amount.toString(),
                       style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.purple),
 
                     ),
@@ -60,7 +61,7 @@ final List<Transaction> transactions=[
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(e.title,style: TextStyle(fontWeight: FontWeight.bold,fontSize:15 ),),
-                      Text(e.date.toString(),style: TextStyle(color: Colors.grey,fontSize:10 ))
+                      Text(DateFormat().format(e.date),style: TextStyle(color: Colors.grey,fontSize:10 ))
                   ],
                   ),
                 ],
