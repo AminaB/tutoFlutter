@@ -45,8 +45,20 @@ final List<Transaction> transactions=[
           Column(
             children : transactions.map((e) =>
             Card(
-              child: Text(e.title),
-            )
+              child:Row(
+                children: [
+                  Container(
+                    child: Text(e.amount.toString()),
+                  ),
+                  Column(children: [
+                    Text(e.title),
+                    Text(e.date.toString())
+                  ],
+                  ),
+                ],
+
+              ),
+              )
             ).toList(),
           )
 
