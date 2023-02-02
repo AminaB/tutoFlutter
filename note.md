@@ -1,37 +1,21 @@
 # Notes
 
-A body can take only one widget, but we can use column widget ( lists of widgets)
-
-## Button
-
-- in onPressed, place the name of the function (ex : action, not action())
-- we have to use sttefull widgets when the internal data change, sttless wdgts can't re-run build() when its properties change
-- setStage(()); update the widget.
-
-## private class
-
-- under_score at first of the name of class, method or variable turn them to private. (ex : _myapp)
-
-## container
-
-- we have Margin (outside the border), Border, padding(between child and border), and child(content)
-- use VoidCallback, if the function do not have input and return nothing
-
-- the (...) infront of list, pull all the values out of it (we cand add directly values of the list to other list)
-
-# depracated widgets
- we can migrate to their new equivalent
- 
-- RaisedButton -> ElevatedButton
-- FlatButton -> TextButton
-- OutlineButton -> OutlinedButton
-
-## In addition, the following resources might be helpful:
-
-    Official Docs: https://flutter.dev/docs
-
-    Widget Catalog: https://flutter.dev/docs/development/ui/widgets
-
-    Dart Docs: https://dart.dev/guides/language/language-tour
-
-    "Introduction to Widgets" - Official Docs: https://flutter.dev/docs/development/ui/widgets-intro
+## Most important widgets
+- MaterialApp
+- Scaffold : AppBar, ...
+- Container 
+- Row
+- Column
+- Flexible
+- Expanded
+- Stack 
+- Card
+- ListViews
+- Gridview
+- ListTilte
+- Text
+- Image
+- Icon
+- GestureDetector
+- Inkwell
+- 

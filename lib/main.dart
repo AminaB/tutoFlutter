@@ -1,57 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:tuto_flutter/Answer.dart';
-import 'package:tuto_flutter/QuestionWidget.dart';
 
-import 'Question.dart';
+import 'transaction.dart';
+
 
 void main() {
   runApp(Myapp());
 }
 
-class Myapp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _MyappState();
-  }
-}
-
-class _MyappState extends State<Myapp> {
-  final _quetions = [
-    {
-      'questionText': 'Your color',
-      'answers': ['Black', 'Red', 'Green', 'White']
-    },
-    {
-      'questionText': 'Your animal',
-      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion']
-    },
-    {
-      'questionText': 'Your Instructor',
-      'answers': ['Max', 'Max', 'Max', 'Max']
-    }
-  ];
-  int _questionIndex = 0;
-
-  void _answerQuestion() {
-    setState(() {
-      _questionIndex = _questionIndex + 1;
-    });
-  }
-
+class Myapp  extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('My first app'),
-        ),
-        body: _questionIndex < _quetions.length
-            ? QuestionWidget(_quetions, _answerQuestion, _questionIndex)
-            : Center(
-                child: Text('End'),
-              ), //
+      title: 'Flutter App',
+      home: MyHomePage(),
+    );
+  }
+
+}
+
+class MyHomePage extends StatelessWidget {
+final List<Transaction> transactions=[
+  Transaction('t1:', 'New shoes',69.99, DateTime.now(),),
+  Transaction('t2:', 'Groceries',16.53, DateTime.now(),)
+];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter App'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            width: double.infinity,
+            child: Card(
+              color:Colors.blue,
+              child:Text('CHART'),
+              elevation: 5,
+            ),
+          ),
+          Column(
+            children : transactions.map((e) =>
+            Card(
+              child: Text(e.title),
+            )
+            ).toList(),
+          )
+
+        ],
       ),
     );
+
   }
 }
