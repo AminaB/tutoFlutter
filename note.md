@@ -18,4 +18,8 @@
 - Icon
 - GestureDetector
 - Inkwell
+
+## container vs column vs row
+- container take one child widget, row and column have a list of widgets (children)
+- container have many styling(decoration, margin, border,color,...) options than the 2 others
 - 
