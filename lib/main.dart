@@ -43,9 +43,25 @@ final List<Transaction> transactions=[
               elevation: 5,
             ),
           ),
+          Card(child:
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Column(crossAxisAlignment:CrossAxisAlignment.end, children: [
+                TextField(decoration:InputDecoration(labelText: 'Title') ),
+                TextField(decoration: InputDecoration(labelText: 'amount'),),
+                TextButton(
+                    onPressed:() => {},
+                    child: Text('Add transaction'),
+                  style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.purple)),
+                )
+
+              ],),
+            )
+            ,),
           Column(
             children : transactions.map((e) =>
             Card(
+              elevation: 5,
               child:Row(
                 children: [
                   Container(
