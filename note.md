@@ -34,3 +34,5 @@ https://pub.dev/packages/intl
   new DateFormat.yMd().add_jm()    -> 7/10/1996 5:08 PM
   new DateFormat.Hm()              -> 17:08 // force 24 hour time
 
+## scrolling 
+wrap the body with SingleChildScrollView() widget
