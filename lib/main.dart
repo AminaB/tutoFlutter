@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'transaction.dart';
+import 'models/transaction.dart';
 
 
 void main() {
@@ -24,7 +24,8 @@ final List<Transaction> transactions=[
   Transaction('t1:', 'New shoes',69.99, DateTime.now(),),
   Transaction('t2:', 'Groceries',16.53, DateTime.now(),)
 ];
-
+late String titleInput;
+late String amountInput;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,11 +48,19 @@ final List<Transaction> transactions=[
             Container(
               padding: EdgeInsets.all(10),
               child: Column(crossAxisAlignment:CrossAxisAlignment.end, children: [
-                TextField(decoration:InputDecoration(labelText: 'Title') ),
-                TextField(decoration: InputDecoration(labelText: 'amount'),),
+                TextField(
+                    decoration:InputDecoration(labelText: 'Title'),
+                    onChanged: (value) => titleInput=value,
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: 'amount'),
+                  onChanged: (value) => amountInput=value,
+                ),
                 TextButton(
-                    onPressed:() => {},
-                    child: Text('Add transaction'),
+                    onPressed:()  {
+                        print(titleInput); print(amountInput);
+                      },
+                  child: Text('Add transaction'),
                   style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.purple)),
                 )
 
