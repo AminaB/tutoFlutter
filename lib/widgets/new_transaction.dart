@@ -48,10 +48,8 @@ class _NewtransactionState extends State<Newtransaction> {
                 onSubmitted: (_)=> submitData,
               ),
               TextButton(
+                onPressed:submitData,
 
-                onPressed:()  { widget.addTx(titleController.text,double.parse(amountController.text));
-                  print(titleController.text);
-                },
 
                 child: Text('Add transaction'),
                 style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.purple)),
