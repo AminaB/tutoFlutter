@@ -12,7 +12,13 @@ class Myapp  extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Personal expense',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        fontFamily: 'OpenSans',
+
+      ),
       home: MyHomePage(),
     );
   }
@@ -49,7 +55,7 @@ void _startAddNewTransaction(BuildContext ctx){
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        title: Text('Personal expense'),
         actions: [
           IconButton( onPressed: ()=>_startAddNewTransaction(context), icon: Icon(Icons.add))
         ],
@@ -62,7 +68,6 @@ void _startAddNewTransaction(BuildContext ctx){
             Container(
               width: double.infinity,
               child: Card(
-                color:Colors.blue,
                 child:Text('CHART'),
                 elevation: 5,
               ),
