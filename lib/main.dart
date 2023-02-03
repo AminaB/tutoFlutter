@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tuto_flutter/widgets/user_transaction.dart';
+import 'package:tuto_flutter/widgets/new_transaction.dart';
+import 'package:tuto_flutter/widgets/transaction_list.dart';
+
+import 'models/transaction.dart';
 
 void main() {
   runApp(Myapp());
@@ -16,15 +19,40 @@ class Myapp  extends StatelessWidget{
 
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
 late String titleInput;
+
 late String amountInput;
+final List<Transaction> _userTransaction=[
+  Transaction('t1:', 'New shoes',69.99, DateTime.now(),),
+  Transaction('t2:', 'Groceries',16.53, DateTime.now(),)
+];
+void _addNewTransaction(String title,double amount){
+  final newTx= Transaction( DateTime.now().toString(),title, amount, DateTime.now());
+  setState(() {
+    _userTransaction.add(newTx);
+  });
+}
+void _startAddNewTransaction(BuildContext ctx){
+  showModalBottomSheet(context: ctx, builder: (bCtx){
+    return Newtransaction(_addNewTransaction);
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter App'),
+        actions: [
+          IconButton( onPressed: ()=>_startAddNewTransaction(context), icon: Icon(Icons.add))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -39,9 +67,14 @@ late String amountInput;
                 elevation: 5,
               ),
             ),
-            UserTransaction(),
+            TransactionList(_userTransaction),
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: ()=>_startAddNewTransaction(context),
       ),
     );
 
