@@ -19,6 +19,7 @@ class _NewtransactionState extends State<Newtransaction> {
     widget.addTx(
       titleController.text, double.parse(amountController.text)
     );
+    Navigator.of(context).pop();
   }
 
   final titleController= TextEditingController();

@@ -36,3 +36,8 @@ https://pub.dev/packages/intl
 
 ## scrolling 
 wrap the body with SingleChildScrollView() widget
+
+## closins the context
+    
+Navigator.of(context).pop();
+
