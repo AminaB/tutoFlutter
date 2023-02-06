@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:tuto_flutter/widgets/chart.dart';
 import 'package:tuto_flutter/widgets/new_transaction.dart';
 import 'package:tuto_flutter/widgets/transaction_list.dart';
 
@@ -45,6 +48,11 @@ void _addNewTransaction(String title,double amount){
     _userTransaction.add(newTx);
   });
 }
+List<Transaction> get _recentTransactions{
+  return _userTransaction.where((element) =>
+     element.date.isAfter(DateTime.now().subtract(Duration(days: 7)))
+  ).toList();
+}
 void _startAddNewTransaction(BuildContext ctx){
   showModalBottomSheet(context: ctx, builder: (bCtx){
     return Newtransaction(_addNewTransaction);
@@ -65,13 +73,7 @@ void _startAddNewTransaction(BuildContext ctx){
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: double.infinity,
-              child: Card(
-                child:Text('CHART'),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransaction),
           ],
         ),
