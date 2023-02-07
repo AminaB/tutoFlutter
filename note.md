@@ -41,3 +41,6 @@ wrap the body with SingleChildScrollView() widget
     
 Navigator.of(context).pop();
 
+## Flexible and Expanded widget
+by adding "fit" and "flex" values, we can specified how the child take the space of your screen.
+
