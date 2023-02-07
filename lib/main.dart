@@ -49,8 +49,8 @@ final List<Transaction> _userTransaction=[
   Transaction('t1:', 'New shoes',69.99, DateTime.now(),),
   Transaction('t2:', 'Groceries',16.53, DateTime.now(),)
 ];
-void _addNewTransaction(String title,double amount){
-  final newTx= Transaction( DateTime.now().toString(),title, amount, DateTime.now());
+void _addNewTransaction(String title,double amount,DateTime chosenDate){
+  final newTx= Transaction( DateTime.now().toString(),title, amount, chosenDate);
   setState(() {
     _userTransaction.add(newTx);
   });
