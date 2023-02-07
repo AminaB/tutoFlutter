@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
 import 'package:tuto_flutter/widgets/chart.dart';
@@ -17,9 +17,8 @@ class Myapp  extends StatelessWidget{
     return MaterialApp(
       title: 'Personal expense',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
-        fontFamily: 'OpenSans',
+        fontFamily: 'Quicksand', colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple).copyWith(secondary: Colors.amber),
+
 
       ),
       home: MyHomePage(),
@@ -39,6 +38,12 @@ late String titleInput;
 
 late String amountInput;
 final List<Transaction> _userTransaction=[
+  Transaction('t1:', 'New shoes',69.99, DateTime.now(),),
+  Transaction('t2:', 'Groceries',16.53, DateTime.now(),),
+  Transaction('t1:', 'New shoes',69.99, DateTime.now(),),
+  Transaction('t2:', 'Groceries',16.53, DateTime.now(),),
+  Transaction('t1:', 'New shoes',69.99, DateTime.now(),),
+  Transaction('t2:', 'Groceries',16.53, DateTime.now(),),
   Transaction('t1:', 'New shoes',69.99, DateTime.now(),),
   Transaction('t2:', 'Groceries',16.53, DateTime.now(),)
 ];
