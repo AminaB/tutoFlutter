@@ -55,6 +55,11 @@ void _addNewTransaction(String title,double amount,DateTime chosenDate){
     _userTransaction.add(newTx);
   });
 }
+void _deleteTransaction(String id){
+  setState(() {
+    _userTransaction.removeWhere((element) => element.id==id);
+  });
+}
 List<Transaction> get _recentTransactions{
   return _userTransaction.where((element) =>
      element.date.isAfter(DateTime.now().subtract(Duration(days: 7)))
@@ -81,7 +86,7 @@ void _startAddNewTransaction(BuildContext ctx){
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransactions),
-            TransactionList(_userTransaction),
+            TransactionList(_userTransaction,_deleteTransaction),
           ],
         ),
       ),
