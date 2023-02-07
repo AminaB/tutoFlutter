@@ -11,7 +11,16 @@ TransactionList(this.transactions);
   Widget build(BuildContext context) {
     return   Container(
       height: 500,
-      child: ListView.builder(
+      child: transactions.isEmpty ? Column(
+        children: [
+          Text('no transaction added yet',style: Theme.of(context).textTheme.titleSmall,),
+          SizedBox(height: 10,),
+          Container(
+            height: 200 ,
+              child: Image.asset('assets/images/866-536x354.jpg',fit: BoxFit.cover,)
+          )
+        ],
+      ) :ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (ctx, index) {
               return Card(
