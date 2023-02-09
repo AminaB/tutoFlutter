@@ -44,3 +44,18 @@ Navigator.of(context).pop();
 ## Flexible and Expanded widget
 by adding "fit" and "flex" values, we can specified how the child take the space of your screen.
 
+## Useful Resources & Links
+
+Attached, you find the source code for this section (multiple code snapshots - also attached to individual lectures throughout this module).
+
+In addition, the following resources might be helpful:
+
+    More on Layouting (with Column(), Row() etc.): https://flutter.dev/docs/development/ui/layout
+
+    More on Images & Assets: https://flutter.dev/docs/development/ui/assets-and-images
+
+    Official Widget Catalog: https://flutter.dev/docs/development/ui/widgets
+
+    Material Design Docs: https://material.io/design/
+
+    Flutter Theming: https://flutter.dev/docs/cookbook/design/themes
