@@ -44,7 +44,7 @@ Navigator.of(context).pop();
 ## Flexible and Expanded widget
 by adding "fit" and "flex" values, we can specified how the child take the space of your screen.
 
-## Useful Resources & Links
+##  
 
 Attached, you find the source code for this section (multiple code snapshots - also attached to individual lectures throughout this module).
 
