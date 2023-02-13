@@ -11,16 +11,19 @@ TransactionList(this.transactions, this.deleteTx);
 
   @override
   Widget build(BuildContext context) {
-    return   transactions.isEmpty ? Column(
-      children: [
-        Text('no transaction added yet',style: Theme.of(context).textTheme.titleSmall,),
-        SizedBox(height: 10,),
-        Container(
-          height: 200 ,
-            child: Image.asset('assets/images/866-536x354.jpg',fit: BoxFit.cover,)
-        )
-      ],
-    ) :ListView.builder(
+    return   transactions.isEmpty ?
+    LayoutBuilder(builder: (ctx,constraints){
+      return Column(
+        children: [
+          Text('no transaction added yet',style: Theme.of(context).textTheme.titleSmall,),
+          SizedBox(height: 10,),
+          Container(
+              height: constraints.maxHeight *0.6 ,
+              child: Image.asset('assets/images/866-536x354.jpg',fit: BoxFit.cover,)
+          )
+        ],
+      );
+    }) :ListView.builder(
       itemCount: transactions.length,
       itemBuilder: (ctx, index) {
         return Card(
