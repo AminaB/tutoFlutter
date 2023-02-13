@@ -1,4 +1,4 @@
-
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -80,7 +80,8 @@ void _startAddNewTransaction(BuildContext ctx){
 
   @override
   Widget build(BuildContext context) {
-  final isLandScape =MediaQuery.of(context).orientation==Orientation.landscape;
+  final mediaQuery=MediaQuery.of(context);
+  final isLandScape =mediaQuery.orientation==Orientation.landscape;
   final appBar=AppBar(
     title: Text('Personal expense'),
     actions: [
@@ -88,7 +89,7 @@ void _startAddNewTransaction(BuildContext ctx){
     ],
   );
   final txtListWidget=  Container(
-      height:(MediaQuery.of(context).size.height-appBar.preferredSize.height- MediaQuery.of(context).padding.top*0.7),
+      height:(mediaQuery.size.height-appBar.preferredSize.height- mediaQuery.padding.top*0.7),
       child: TransactionList(_userTransaction,_deleteTransaction)
   );
     return Scaffold(
@@ -100,7 +101,8 @@ void _startAddNewTransaction(BuildContext ctx){
           children: [
             if(isLandScape)Row(children: [
               Text('show Chart'),
-              Switch(value: _showChart, onChanged: (val){
+              Switch.adaptive(activeColor: Theme.of(context).accentColor,value: _showChart, onChanged: (val){
+
                 setState(() {
                   _showChart=val;
                 });
@@ -108,24 +110,26 @@ void _startAddNewTransaction(BuildContext ctx){
             ],),
             if(!isLandScape)
              Container(
-                height:(MediaQuery.of(context).size.height-appBar.preferredSize.height - MediaQuery.of(context).padding.top)*0.3,
+                height:(mediaQuery.size.height-appBar.preferredSize.height - mediaQuery.padding.top)*0.3,
                 child: Chart(_recentTransactions)
             ),
             if(!isLandScape)
             txtListWidget,
            if (isLandScape) _showChart?
            Container(
-               height:(MediaQuery.of(context).size.height-appBar.preferredSize.height - MediaQuery.of(context).padding.top*0.7),
+               height:(mediaQuery.size.height-appBar.preferredSize.height - mediaQuery.padding.top*0.7),
                child: Chart(_recentTransactions)
            ):txtListWidget
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: ()=>_startAddNewTransaction(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ?Container()
+          :FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: ()=>_startAddNewTransaction(context),
+         ),
     );
 
   }

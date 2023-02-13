@@ -42,7 +42,15 @@ TransactionList(this.transactions, this.deleteTx);
                 style: TextStyle(fontWeight: FontWeight.bold,fontSize:15 )
             ),
             subtitle: Text(DateFormat.yMMMd().format(transactions[index].date),style: TextStyle(color: Colors.grey,fontSize:10 )),
-            trailing: IconButton(
+            trailing: MediaQuery.of(context).size.width>460?TextButton.icon(
+                onPressed: ()=>deleteTx(transactions[index].id),
+                icon: Icon(Icons.delete),
+                label: Text('delete'),
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(Colors.red),
+                )
+            ):
+            IconButton(
               icon: Icon(Icons.delete),
               color: Theme.of(context).errorColor,
               onPressed: ()=>deleteTx(transactions[index].id),
