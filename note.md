@@ -83,4 +83,11 @@ This text ALWAYS has a size of 20 device pixels, no matter what the user changed
 This text on the other hand also has a size of 20 if the user didn't change anything in the settings (because textScaleFactor by default is 1). But if changes were made, the font size of this text respects the user settings.
 
 ## Capurteno Widget 
- it is widgets for IOS devices 
+ it is widgets for IOS devices
+ In addition, the following resources might be helpful:
+
+    More on MediaQuery & Responsive Layouts: https://api.flutter.dev/flutter/widgets/MediaQuery-class.html & https://stackoverflow.com/questions/49704497/how-to-make-flutter-app-responsive-according-to-different-screen-size?rq=1
+
+    More on LayoutBuilder: https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html
+
+    All Cupertino Widgets: https://flutter.dev/docs/development/ui/widgets/cupertino
