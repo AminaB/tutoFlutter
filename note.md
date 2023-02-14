@@ -81,3 +81,6 @@ This text ALWAYS has a size of 20 device pixels, no matter what the user changed
     Text('This changes!', style: TextStyle(fontSize: 20 * curScaleFactor));
 
 This text on the other hand also has a size of 20 if the user didn't change anything in the settings (because textScaleFactor by default is 1). But if changes were made, the font size of this text respects the user settings.
+
+## Capurteno Widget 
+ it is widgets for IOS devices 
