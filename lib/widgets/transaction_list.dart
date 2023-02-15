@@ -7,7 +7,7 @@ final List<Transaction> transactions;
 final Function deleteTx;
 
 
-TransactionList(this.transactions, this.deleteTx);
+const TransactionList(this.transactions, this.deleteTx, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ TransactionList(this.transactions, this.deleteTx);
       return Column(
         children: [
           Text('no transaction added yet',style: Theme.of(context).textTheme.titleSmall,),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Container(
               height: constraints.maxHeight *0.6 ,
               child: Image.asset('assets/images/866-536x354.jpg',fit: BoxFit.cover,)
@@ -28,30 +28,30 @@ TransactionList(this.transactions, this.deleteTx);
       itemBuilder: (ctx, index) {
         return Card(
           elevation: 5,
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             vertical: 5,
             horizontal: 5
 
           ),
           child: ListTile(
             leading: CircleAvatar(radius: 30,
-              child: Padding(child: FittedBox(child: Text('£${transactions[index].amount}'),),padding: EdgeInsets.all(6),),
+              child: Padding(padding: const EdgeInsets.all(6),child: FittedBox(child: Text('£${transactions[index].amount}'),),),
             ),
             title: Text(
               transactions[index].title,
-                style: TextStyle(fontWeight: FontWeight.bold,fontSize:15 )
+                style: const TextStyle(fontWeight: FontWeight.bold,fontSize:15 )
             ),
-            subtitle: Text(DateFormat.yMMMd().format(transactions[index].date),style: TextStyle(color: Colors.grey,fontSize:10 )),
+            subtitle: Text(DateFormat.yMMMd().format(transactions[index].date),style: const TextStyle(color: Colors.grey,fontSize:10 )),
             trailing: MediaQuery.of(context).size.width>460?TextButton.icon(
                 onPressed: ()=>deleteTx(transactions[index].id),
-                icon: Icon(Icons.delete),
-                label: Text('delete'),
+                icon: const Icon(Icons.delete),
+                label: const Text('delete'),
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.all(Colors.red),
                 )
             ):
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               color: Theme.of(context).errorColor,
               onPressed: ()=>deleteTx(transactions[index].id),
 
