@@ -77,7 +77,23 @@ void _startAddNewTransaction(BuildContext ctx){
     return Newtransaction(_addNewTransaction);
   });
 }
+Widget _buildLandscapeContent(){
+return Row(children: [
+  Text('show Chart'),
+  Switch.adaptive(activeColor: Theme.of(context).accentColor,value: _showChart, onChanged: (val){
 
+    setState(() {
+      _showChart=val;
+    });
+  },)
+],);
+}
+List<Widget> _buildPortraitContent(MediaQueryData mediaQuery, PreferredSizeWidget appBar, Widget txtListWidget){
+  return [Container(
+      height:(mediaQuery.size.height-appBar.preferredSize.height - mediaQuery.padding.top)*0.3,
+      child: Chart(_recentTransactions)
+  ),txtListWidget];
+}
   @override
   Widget build(BuildContext context) {
   final mediaQuery=MediaQuery.of(context);
@@ -114,20 +130,8 @@ void _startAddNewTransaction(BuildContext ctx){
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if(isLandScape)Row(children: [
-            Text('show Chart'),
-            Switch.adaptive(activeColor: Theme.of(context).accentColor,value: _showChart, onChanged: (val){
-
-              setState(() {
-                _showChart=val;
-              });
-            },)
-          ],),
-          if(!isLandScape)
-            Container(
-                height:(mediaQuery.size.height-appBar.preferredSize.height - mediaQuery.padding.top)*0.3,
-                child: Chart(_recentTransactions)
-            ),
+          if(isLandScape) _buildLandscapeContent(),
+          if(!isLandScape) ..._buildPortraitContent(mediaQuery,appBar,txtListWidget),
           if(!isLandScape)
             txtListWidget,
           if (isLandScape) _showChart?
