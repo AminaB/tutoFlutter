@@ -1,7 +1,7 @@
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tuto_flutter/categories_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,36 +13,35 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home:  MyHomePage(),
-    );
-  }
-}
+        canvasColor: Color.fromRGBO(255, 254, 229, 1),
+        fontFamily: 'OpenSans',
+        textTheme: ThemeData.light().textTheme.copyWith(
+          bodySmall: TextStyle(
+            color: Color.fromRGBO(20, 51, 51, 1),
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('DeliMeals'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          ),
+            bodyMedium: const TextStyle(
+                color: Color.fromRGBO(20, 51, 51, 1)
             ),
-          ],
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+            titleSmall: const TextStyle(
+                fontSize: 15,
+                fontFamily: 'Quicksand',
+                fontWeight: FontWeight.bold
+            ),
+            titleMedium: const TextStyle(
+                fontSize: 20,
+                fontFamily: 'Quicksand',
+                fontWeight: FontWeight.bold
+            ),
+            titleLarge: const TextStyle(
+                fontSize: 30,
+                fontFamily: 'Quicksand',
+                fontWeight: FontWeight.bold
+            )
+        ), colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink).copyWith(secondary: Colors.amber),
+
+      ),
+      home:  CategoriesScreen(),
     );
   }
 }
