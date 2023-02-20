@@ -24,12 +24,12 @@ class MyApp extends StatelessWidget {
                 color: Color.fromRGBO(20, 51, 51, 1)
             ),
             titleSmall: const TextStyle(
-                fontSize: 15,
+                fontSize: 20,
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold
             ),
             titleMedium: const TextStyle(
-                fontSize: 20,
+                fontSize: 25,
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold
             ),
