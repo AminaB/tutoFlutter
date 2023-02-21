@@ -1,8 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tuto_flutter/categories_screen.dart';
-import 'package:tuto_flutter/category_meals_screen.dart';
+import 'package:tuto_flutter/screens/categories_screen.dart';
+import 'package:tuto_flutter/screens/category_meals_screen.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tuto_flutter/dummy_data.dart';
+import 'package:tuto_flutter/widgets/meal_item.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
   static var routeName= '/category_meals';
@@ -19,7 +20,7 @@ class CategoryMealsScreen extends StatelessWidget {
           title: Text(categoryTitle.toString()),
         ),
           body: ListView.builder(itemBuilder: (ctx, index) =>
-              Text(categoryMeals[index].title),
+              MealItem(categoryMeals[index].title, categoryMeals[index].affordability, categoryMeals[index].complexity, categoryMeals[index].imageUrl, categoryMeals[index].duration),
               itemCount: categoryMeals.length,
           ),
 

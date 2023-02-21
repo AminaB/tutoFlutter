@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tuto_flutter/categories_item.dart';
+import 'package:tuto_flutter/widgets/categories_item.dart';
 import 'package:tuto_flutter/dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
