@@ -9,7 +9,7 @@ class MealDetailScreen extends StatelessWidget {
     return   Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Text(
-        'inger',
+        texte,
         style:Theme.of(context).textTheme.titleSmall
         ,
       ),
