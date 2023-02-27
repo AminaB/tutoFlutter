@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:tuto_flutter/screens/categories_screen.dart';
 import 'package:tuto_flutter/screens/favorites_screen.dart';
+import 'package:tuto_flutter/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
@@ -12,8 +14,8 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   final List<Map<String,dynamic>> _pages=[
-    {'page':CategoriesScreen(),'title':'Categories'},
-    {'page':FavoritesScreen(),'title':'Your Favorites'}
+    {'page':const CategoriesScreen(),'title':'Categories'},
+    {'page':const FavoritesScreen(),'title':'Your Favorites'}
   ];
   int _selectedPageIndex=0;
   void _selectPage(int index){
@@ -24,8 +26,11 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(title: Text(_pages[_selectedPageIndex]['title']),
+      appBar: AppBar(
+        title: Text(_pages[_selectedPageIndex]['title']
+        ),
     ),
+    drawer: MainDrawer(),
     body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage ,
