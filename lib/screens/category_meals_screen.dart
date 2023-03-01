@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tuto_flutter/dummy_data.dart';
 import 'package:tuto_flutter/models/meal.dart';
 import 'package:tuto_flutter/widgets/meal_item.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   static var routeName= '/category_meals';
+  final List<Meal> availableMeals;
+  CategoryMealsScreen(this.availableMeals);
 
   @override
   State<CategoryMealsScreen> createState() => _CategoryMealsScreenState();
@@ -26,7 +27,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
       final routeArgs=ModalRoute.of(context)?.settings.arguments as Map<String, String>;
       categoryTitle=routeArgs['title']!;
       final categoryId=routeArgs['id'];
-      displayedMeals=DUMMY_MEALS.where((element) => element.categories.contains(categoryId)).toList();
+      displayedMeals=widget.availableMeals.where((element) => element.categories.contains(categoryId)).toList();
       _loadedInitData=true;
     }
     super.didChangeDependencies();
