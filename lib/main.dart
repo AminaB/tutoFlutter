@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:tuto_flutter/screens/category_meals_screen.dart';
 import 'package:tuto_flutter/screens/filters_screen.dart';
 import 'package:tuto_flutter/screens/tabs_screen.dart';
@@ -27,6 +28,10 @@ class _MyAppState extends State<MyApp> {
     'vegan':false,
     'vegetarian':false,
   };
+  bool _isMealFavorite(String id){
+    return _favoritedMeals.any((element) =>element.id==id);
+  }
+  List<Meal> _favoritedMeals=[];
   List<Meal> _availableMeals=DUMMY_MEALS;
   void _setFilters(Map<String,bool> filterData){
     setState(() {
@@ -43,6 +48,18 @@ class _MyAppState extends State<MyApp> {
         return true;
       }).toList();
     });
+  }
+  void _toogleFavorite(String mealId){
+     final existingIndex= _favoritedMeals.indexWhere((element) => mealId==element.id);
+     if(existingIndex>=0){
+       setState(() {
+         _favoritedMeals.removeAt(existingIndex);
+       });
+     }else{
+       setState(() {
+         _favoritedMeals.add(DUMMY_MEALS.firstWhere((element) => mealId==element.id));
+       });
+     }
   }
   @override
   Widget build(BuildContext context) {
@@ -79,9 +96,9 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/',
       routes: {
-        '/':(ctx)=>const TabsScreen(),
+        '/':(ctx)=> TabsScreen(_favoritedMeals),
         CategoryMealsScreen.routeName: (ctx)=>CategoryMealsScreen(_availableMeals),
-        MealDetailScreen.routeName:(ctx)=>MealDetailScreen(),
+        MealDetailScreen.routeName:(ctx)=>MealDetailScreen(_toogleFavorite,_isMealFavorite),
         FilterScreen.routeName:(ctx)=>FilterScreen(_filters,_setFilters),
       },
       onGenerateRoute: (settings) {
