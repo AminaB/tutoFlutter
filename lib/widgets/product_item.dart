@@ -35,7 +35,7 @@ class ProductItem extends StatelessWidget {
               imageUrl, fit: BoxFit.fill
           ),
           onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>ProductDetailScreen(title)));
+            Navigator.of(context).pushNamed(ProductDetailScreen.routeName,arguments: id);
           } ,
         ),
     );

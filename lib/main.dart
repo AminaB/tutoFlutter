@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:tuto_flutter/screens/product_detail_screen.dart';
 import 'package:tuto_flutter/screens/products_overview_screen.dart';
 
 
@@ -45,12 +46,9 @@ class MyApp extends StatelessWidget {
       //
       // ),
       // *//*initialRoute: '/',
-      // routes: {
-      //   //'/':(ctx)=> TabsScreen(_favoritedMeals),
-      //  // CategoryMealsScreen.routeName: (ctx)=>CategoryMealsScreen(_availableMeals),
-      //   //MealDetailScreen.routeName:(ctx)=>MealDetailScreen(_toogleFavorite,_isMealFavorite),
-      //   //FilterScreen.routeName:(ctx)=>FilterScreen(_filters,_setFilters),
-      // },
+      routes: {
+        ProductDetailScreen.routeName:(ctx)=>ProductDetailScreen(),
+      },
       // onGenerateRoute: (settings) {
       //   // print(settings.arguments);
       //   // if(settings.name=='/meal-details'){
