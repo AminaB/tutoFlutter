@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tuto_flutter/screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
   final String id;
@@ -29,8 +30,13 @@ class ProductItem extends StatelessWidget {
 
       ),
         ),
-        child: Image.network(
-            imageUrl, fit: BoxFit.fill
+        child: GestureDetector(
+          child: Image.network(
+              imageUrl, fit: BoxFit.fill
+          ),
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>ProductDetailScreen(title)));
+          } ,
         ),
     );
   }
