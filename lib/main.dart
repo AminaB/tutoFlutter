@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:tuto_flutter/screens/products_overview_screen.dart';
 
 
 void main() {
@@ -58,21 +59,9 @@ class MyApp extends StatelessWidget {
         //   MaterialPageRoute(builder: (context) => CategoryMealsScreen(),);
         // }
       },*/
-      home: MyHomePage(),
+      home: ProductsOverviewScreen(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-   return  Scaffold(
-        appBar: AppBar(
-            title:Text('MyShop')
-        ),
-     body: Center(
-       child: Text('buil a shop'),
-     ),
-   );
-  }
-}
+
