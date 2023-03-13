@@ -1,3 +1,4 @@
 # Notes
 
-App with multiple screens
+## State management 
+    - state is the date which affect the UI and which might change over time
