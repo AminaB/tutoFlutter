@@ -7,3 +7,5 @@
 ## extends vs with
      with extends the child class cans use all properties and function of parent class or override method to personalise it
      with is used when the connection between mixin class and child is not strong (it is utility, fonctionnality, providers),  we can add many mixin to a class 
+## app state vs wide state( provider vs statefullWidget)
+    Provider change all widget using the concern data, otherwise, statefull restart the widget only
