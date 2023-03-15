@@ -1,4 +1,4 @@
 # Notes
 
 ## State management 
-    - state is the date which affect the UI and which might change over time
+    - state is the data which affect the UI and which might change over time
