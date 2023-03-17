@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tuto_flutter/providers/cart.dart';
 import 'package:tuto_flutter/providers/products.dart';
+import 'package:tuto_flutter/screens/cart_screen.dart';
 import 'package:tuto_flutter/screens/product_detail_screen.dart';
 import 'package:tuto_flutter/screens/products_overview_screen.dart';
 import 'package:provider/provider.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         // *//*initialRoute: '/',
         routes: {
           ProductDetailScreen.routeName:(ctx)=>ProductDetailScreen(),
+          CartScreen.routeName:(ctx)=>CartScreen(),
         },
         // onGenerateRoute: (settings) {
         //   // print(settings.arguments);
