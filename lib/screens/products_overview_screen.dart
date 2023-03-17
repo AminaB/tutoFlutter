@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/products.dart';
+import '../providers/cart.dart';
 import '../widgets/Products_grid.dart';
 
 enum FilterOptions{
@@ -18,7 +18,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites=false;
   @override
   Widget build(BuildContext context) {
-    final productsContainer=Provider.of<Products>(context,listen:false);
     return  Scaffold(
       appBar: AppBar(
         title: const Text('MyShop'),
@@ -41,7 +40,17 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               const PopupMenuItem(value:FilterOptions.All, child: Text("Show All"))
 
             ]
-          )
+          ),
+          Consumer<Cart>(builder: (context, cartData, ch) =>    Badge(
+            label: Text(cartData.itemCount.toString()),
+            child:ch,
+          ) ,
+              child : IconButton(
+                icon:const Icon(Icons.shopping_cart) ,
+                onPressed: () {  },
+              )
+          ),
+
         ],
       ),
       body: ProductsGrid(_showOnlyFavorites),
