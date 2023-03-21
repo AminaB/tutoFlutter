@@ -9,4 +9,5 @@
      with is used when the connection between mixin class and child is not strong (it is utility, fonctionnality, providers),  we can add many mixin to a class 
 ## app state vs wide state( provider vs statefullWidget)
     Provider change all widget using the concern data, otherwise, statefull restart the widget only.
-    we can use consumer to reload only a small part inside the build method
+    we can use consumer to rerun only a small part inside the build method.
+    providers rerun all build method
