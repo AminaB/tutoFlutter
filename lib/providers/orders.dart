@@ -12,7 +12,7 @@ class OrderItem{
 class Orders with ChangeNotifier{
   List<OrderItem> _orders=[];
 
-  List<OrderItem> get orderItems => [..._orders];
+  List<OrderItem> get orders => [..._orders];
   void addOrder(List<CartItem> cartProducts, double total){
     _orders.insert(0, OrderItem(DateTime.now().toString(), total, cartProducts, DateTime.now()));
     notifyListeners();
