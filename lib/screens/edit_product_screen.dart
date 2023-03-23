@@ -46,7 +46,11 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
 
   }
   void _saveForm(){
-    _form.currentState?.save();
+    final isValid=_form.currentState!.validate();
+    if(!isValid){
+      return ;
+    }
+    _form.currentState!.save();
   }
   @override
   Widget build(BuildContext context) {
@@ -64,21 +68,32 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
           child: ListView(
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Title',),
+                decoration: const InputDecoration(labelText: 'Title',),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_priceFocusNode);
                 },
+                validator: (value){
+                  if(value!.isEmpty){return 'Please provide a value.';}return null;
+                },
                 onSaved: (value){_editedProduct=Product(id: _editedProduct.id, title: value.toString(), description: _editedProduct.description, price: _editedProduct.price, imageUrl: _editedProduct.imageUrl);},
+
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Price',),
+                decoration: const InputDecoration(labelText: 'Price',),
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
                 focusNode: _priceFocusNode,
                 onFieldSubmitted: (_){
                   FocusScope.of(context).requestFocus(_descriptionFocusNode);
                 },
+                validator: (value){
+                  if(value!.isEmpty){return 'Please provide a price.';}
+                  if(double.tryParse(value) != null){return 'Please provide a valid number.';}
+                  if(double.parse(value) <= 0){return 'Please provide a number greater tha 0.';}
+                  return null;
+                 },
+
                 onSaved: (value){_editedProduct=Product(id: _editedProduct.id, title: _editedProduct.title, description: _editedProduct.description, price:  double.parse(value!), imageUrl: _editedProduct.imageUrl);},
 
               ),
@@ -88,6 +103,11 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.multiline,
                 focusNode: _descriptionFocusNode,
+                validator: (value){
+                  if(value!.isEmpty){return 'Please enter a description.';}
+                  if(value.length<10){return 'Should be at least 10 characters.';}
+                  return null;
+                },
                 onSaved: (value){_editedProduct=Product(id: _editedProduct.id, title: _editedProduct.title, description: value.toString(), price:  _editedProduct.price, imageUrl: _editedProduct.imageUrl);},
 
 
@@ -115,6 +135,14 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
                       controller: _imageUrlController,
                       focusNode: _imageUrlFocusNode,
                       onFieldSubmitted: (_){_saveForm();},
+                      validator: (value){
+                        if(value!.isEmpty){
+                          return 'Please enter an image URL.';
+                        }
+                        if(!value.startsWith('http') || !value.startsWith('https')){
+                          return 'Please enter a valid URL.';
+                        }
+                      },
                       onSaved: (value){_editedProduct=Product(id: _editedProduct.id, title: _editedProduct.title, description: _editedProduct.description, price:  _editedProduct.price, imageUrl: value.toString());},
 
                     ),
