@@ -4,6 +4,7 @@ import 'package:tuto_flutter/providers/cart.dart';
 import 'package:tuto_flutter/providers/orders.dart';
 import 'package:tuto_flutter/providers/products.dart';
 import 'package:tuto_flutter/screens/cart_screen.dart';
+import 'package:tuto_flutter/screens/edit_product_screen.dart';
 import 'package:tuto_flutter/screens/orders_screen.dart';
 import 'package:tuto_flutter/screens/product_detail_screen.dart';
 import 'package:tuto_flutter/screens/products_overview_screen.dart';
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
           CartScreen.routeName:(ctx)=>const CartScreen(),
           OrderScreen.routeName:(ctx)=>const OrderScreen(),
           UserProductsScreen.routeName:(ctx)=>UserProductsScreen(),
+          EditProductsScreen.routeName:(ctx)=>EditProductsScreen(),
         },
         // onGenerateRoute: (settings) {
         //   // print(settings.arguments);
