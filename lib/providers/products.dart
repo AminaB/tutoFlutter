@@ -42,8 +42,9 @@ Product findById(String id){
 }
   List<Product> get favoritesItems =>
       _items.where((element) => element.isFavorite).toList()  ;
-  void addProduct(){
-   // _items.add(value);
+  void addProduct(Product product){
+    final newP=Product(id: DateTime.now().toString(), title: product.title, description: product.description, price: product.price, imageUrl: product.imageUrl);
+    _items.add(newP);
     notifyListeners();
   }
   List<Product> get items => [..._items]  ;

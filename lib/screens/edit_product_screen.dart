@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tuto_flutter/providers/product.dart';
+
+import '../providers/products.dart';
 
 class EditProductsScreen extends StatefulWidget {
   static const routeName='/edit-product';
@@ -51,6 +54,8 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
       return ;
     }
     _form.currentState!.save();
+    Provider.of<Products>(context,listen: false).addProduct(_editedProduct);
+    Navigator.of(context).pop();
   }
   @override
   Widget build(BuildContext context) {
@@ -89,7 +94,7 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
                 },
                 validator: (value){
                   if(value!.isEmpty){return 'Please provide a price.';}
-                  if(double.tryParse(value) != null){return 'Please provide a valid number.';}
+                  //if(double.tryParse(value) != null){return 'Please provide a valid number.';}
                   if(double.parse(value) <= 0){return 'Please provide a number greater tha 0.';}
                   return null;
                  },
