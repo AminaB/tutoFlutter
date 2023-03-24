@@ -39,13 +39,13 @@ class Products with ChangeNotifier{
       'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
   ];
-  var _showFavoritesOnly=false;
 Product findById(String id){
   return _items.firstWhere((element) => element.id==id);
 }
   List<Product> get favoritesItems =>
       _items.where((element) => element.isFavorite).toList()  ;
 
+  var _showFavoritesOnly=false;
   void addProduct(Product product){
     final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json");
     http.post(url,body: json.encode({
@@ -54,9 +54,11 @@ Product findById(String id){
       'price': product.price,
       'imageUrl': product.imageUrl,
       'isFavorite':product.isFavorite
-    }));
-    final newP=Product(id: DateTime.now().toString(), title: product.title, description: product.description, price: product.price, imageUrl: product.imageUrl);
-    _items.add(newP);
+    })).then((response) {
+      final newP=Product(id: json.decode(response.body)['name'], title: product.title, description: product.description, price: product.price, imageUrl: product.imageUrl);
+      _items.add(newP);
+    });
+
     notifyListeners();
   }
   List<Product> get items => [..._items]  ;
