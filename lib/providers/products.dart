@@ -46,9 +46,9 @@ Product findById(String id){
       _items.where((element) => element.isFavorite).toList()  ;
 
   var _showFavoritesOnly=false;
-  void addProduct(Product product){
+  Future<void> addProduct(Product product){
     final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json");
-    http.post(url,body: json.encode({
+    return http.post(url,body: json.encode({
       'title': product.title,
       'description': product.description,
       'price': product.price,
@@ -57,9 +57,9 @@ Product findById(String id){
     })).then((response) {
       final newP=Product(id: json.decode(response.body)['name'], title: product.title, description: product.description, price: product.price, imageUrl: product.imageUrl);
       _items.add(newP);
-    });
+      notifyListeners();
 
-    notifyListeners();
+    });
   }
   List<Product> get items => [..._items]  ;
      // _showFavoritesOnly ? _items.where((element) => element.isFavorite).toList():

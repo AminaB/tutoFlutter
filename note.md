@@ -18,3 +18,7 @@
     - we connect flutter to a webserver( like firebase) by ssending http request, and then de beb sever reaches out to databases.
     - create a realtime db in firebase
     - flutter and firebase reach out by sending htpp reques (get, post, patch for update, put for replace, delete)
+## Feature
+    use Feature to defined code that execute after even the code below it.
+    then medthod after post, take a Feature.
+    we can call then after then, it also tacke a feature post().then(((){}).then(..)
