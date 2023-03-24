@@ -11,3 +11,5 @@
     Provider change all widget using the concern data, otherwise, statefull restart the widget only.
     we can use consumer to rerun only a small part inside the build method.
     providers rerun all build method
+## didChangeDependencies
+    to use the arguments route, and update a product

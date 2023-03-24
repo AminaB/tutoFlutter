@@ -57,4 +57,13 @@ Product findById(String id){
     _showFavoritesOnly=false;
     notifyListeners();
   }
+  void updateProduct(String id, Product newProduct){
+    final productIndex=_items.indexWhere((element) => element.id==id);
+    if(productIndex>=0){
+      _items[productIndex]=newProduct;
+      notifyListeners();
+    }else{
+      print("...");
+    }
+  }
 }
