@@ -13,3 +13,8 @@
     providers rerun all build method
 ## didChangeDependencies
     to use the arguments route, and update a product
+## databases
+    - we cannot connect directly flutter to a db (it is complex and unsecure)
+    - we connect flutter to a webserver( like firebase) by ssending http request, and then de beb sever reaches out to databases.
+    - create a realtime db in firebase
+    - flutter and firebase reach out by sending htpp reques (get, post, patch for update, put for replace, delete)

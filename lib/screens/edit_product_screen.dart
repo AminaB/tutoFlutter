@@ -41,9 +41,9 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
   @override
   void didChangeDependencies() {
     if(_isInit){
-      final productId=ModalRoute.of(context)!.settings.arguments as String;
-      if(productId != null){
-        _editedProduct=Provider.of<Products>(context,listen: false).findById(productId);
+      final productId=ModalRoute.of(context)!.settings.arguments ;
+      if(productId != null ){
+        _editedProduct=Provider.of<Products>(context,listen: false).findById(productId.toString());
         _initValues={
           'title':_editedProduct.title,
           'description':_editedProduct.description,
@@ -76,16 +76,17 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
   }
   void _saveForm(){
     final isValid=_form.currentState!.validate();
+
     if(!isValid){
       return ;
     }
     _form.currentState!.save();
-    if(_editedProduct!=null){
+    if(_editedProduct.id!=null && _editedProduct.id!='' ){
+
       Provider.of<Products>(context,listen: false).updateProduct(_editedProduct.id,_editedProduct);
 
     }else{
       Provider.of<Products>(context,listen: false).addProduct(_editedProduct);
-
     }
     Navigator.of(context).pop();
   }
@@ -112,7 +113,7 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
                   FocusScope.of(context).requestFocus(_priceFocusNode);
                 },
                 validator: (value){
-                  if(value!.isEmpty){return 'Please provide a value.';}return null;
+                  if(value == null || value.isEmpty){return 'Please provide a value.';}return null;
                 },
                 onSaved: (value){_editedProduct=Product(id: _editedProduct.id, title: value.toString(), description: _editedProduct.description, price: _editedProduct.price, imageUrl: _editedProduct.imageUrl, isFavorite: _editedProduct.isFavorite);},
 
@@ -127,8 +128,8 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
                   FocusScope.of(context).requestFocus(_descriptionFocusNode);
                 },
                 validator: (value){
-                  if(value!.isEmpty){return 'Please provide a price.';}
-                  //if(double.tryParse(value) != null){return 'Please provide a valid number.';}
+                  if(value == null || value.isEmpty){return 'Please provide a price.';}
+                  if(double.tryParse(value) == null){return 'Please provide a valid number.';}
                   if(double.parse(value) <= 0){return 'Please provide a number greater tha 0.';}
                   return null;
                  },
@@ -144,7 +145,7 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
                 keyboardType: TextInputType.multiline,
                 focusNode: _descriptionFocusNode,
                 validator: (value){
-                  if(value!.isEmpty){return 'Please enter a description.';}
+                  if(value == null || value.isEmpty){return 'Please enter a description.';}
                   if(value.length<10){return 'Should be at least 10 characters.';}
                   return null;
                 },
@@ -176,7 +177,7 @@ class _EditProductsScreenState extends State<EditProductsScreen> {
                       focusNode: _imageUrlFocusNode,
                       onFieldSubmitted: (_){_saveForm();},
                       validator: (value){
-                        if(value!.isEmpty){
+                        if(value == null || value.isEmpty){
                           return 'Please enter an image URL.';
                         }
                         if(!value.startsWith('http') || !value.startsWith('https')){
