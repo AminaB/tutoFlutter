@@ -59,6 +59,9 @@ Product findById(String id){
       _items.add(newP);
       notifyListeners();
 
+    }).catchError((error){
+      print(error);
+      throw error;
     });
   }
   List<Product> get items => [..._items]  ;
