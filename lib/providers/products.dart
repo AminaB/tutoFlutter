@@ -46,23 +46,23 @@ Product findById(String id){
       _items.where((element) => element.isFavorite).toList()  ;
 
   var _showFavoritesOnly=false;
-  Future<void> addProduct(Product product){
+  Future<void> addProduct(Product product) async{
     final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json");
-    return http.post(url,body: json.encode({
-      'title': product.title,
-      'description': product.description,
-      'price': product.price,
-      'imageUrl': product.imageUrl,
-      'isFavorite':product.isFavorite
-    })).then((response) {
+    try {
+      final response = await http.post(url, body: json.encode({
+        'title': product.title,
+        'description': product.description,
+        'price': product.price,
+        'imageUrl': product.imageUrl,
+        'isFavorite': product.isFavorite
+      }));
       final newP=Product(id: json.decode(response.body)['name'], title: product.title, description: product.description, price: product.price, imageUrl: product.imageUrl);
       _items.add(newP);
       notifyListeners();
-
-    }).catchError((error){
-      print(error);
-      throw error;
-    });
+    }catch(error){
+       print(error);
+       throw error;
+    }
   }
   List<Product> get items => [..._items]  ;
      // _showFavoritesOnly ? _items.where((element) => element.isFavorite).toList():
