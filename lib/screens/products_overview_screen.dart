@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tuto_flutter/providers/products.dart';
 import 'package:tuto_flutter/screens/cart_screen.dart';
 import 'package:tuto_flutter/widgets/app_drawer.dart';
 
@@ -17,6 +18,21 @@ class ProductsOverviewScreen extends StatefulWidget {
 }
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+  var _isInit=true;
+  @override
+  void initState() {
+    //Provider.of<Products>(context); do not do that i initstate
+
+    super.initState();
+  }
+  @override
+  void didChangeDependencies() {
+    if(_isInit){
+      Provider.of<Products>(context).fetchAndSetProducts();
+    }
+    _isInit=false;
+    super.didChangeDependencies();
+  }
   var _showOnlyFavorites=false;
   @override
   Widget build(BuildContext context) {

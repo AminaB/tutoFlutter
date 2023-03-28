@@ -46,6 +46,18 @@ Product findById(String id){
       _items.where((element) => element.isFavorite).toList()  ;
 
   var _showFavoritesOnly=false;
+
+  fetchAndSetProducts() async{
+    final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json");
+    try{
+      final  response=await http.get(url);
+      print(json.decode(response.body));
+
+    }catch(error){
+      rethrow;
+    }
+
+  }
   Future<void> addProduct(Product product) async{
     final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json");
     try {
