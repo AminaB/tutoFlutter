@@ -101,9 +101,19 @@ Product findById(String id){
     _showFavoritesOnly=false;
     notifyListeners();
   }
-  void updateProduct(String id, Product newProduct){
+  Future<void> updateProduct(String id, Product newProduct) async{
+
     final productIndex=_items.indexWhere((element) => element.id==id);
     if(productIndex>=0){
+      final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products/$id.json");
+      await http.patch(url,body: json.encode({
+        'title': newProduct.title,
+        'description': newProduct.description,
+        'imageUrl': newProduct.imageUrl,
+        'price': newProduct.price,
+        'isFavorite': newProduct.isFavorite
+
+      }));
       _items[productIndex]=newProduct;
       notifyListeners();
     }else{
@@ -111,7 +121,20 @@ Product findById(String id){
     }
   }
   void deleteproduct(String id){
-    _items.removeWhere((element) => element.id==id);
+    final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products/$id.json");
+    final existingProductIndex= _items.indexWhere((element) => element.id==id);
+    Product? existingProduct=_items[existingProductIndex];
+    _items.removeAt(existingProductIndex);
+    http.delete(url).then((response) {
+      if(response.statusCode>=400){
+        throw("error");
+      }
+      existingProduct=null;
+    }).catchError((_){
+      _items.insert(existingProductIndex, existingProduct!);
+      notifyListeners();
+
+    });
     notifyListeners();
   }
 }
