@@ -24,3 +24,4 @@
     we can call then after then, it also tacke a feature post().then(((){}).then(..)
 ## async for handling erros
     - adding async mean our method automatically return a Future
+## NB : we cannot use context inside future.
