@@ -22,6 +22,8 @@
     use Feature to defined code that execute after even the code below it.
     then medthod after post, take a Feature.
     we can call then after then, it also tacke a feature post().then(((){}).then(..)
-## async for handling erros
+## async for handling errors
     - adding async mean our method automatically return a Future
 ## NB : we cannot use context inside future.
+
+# User Authentication 
