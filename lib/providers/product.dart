@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
+
+import 'package:http/http.dart' as http;
 
 class Product with ChangeNotifier{
   final String id;
@@ -10,8 +14,27 @@ class Product with ChangeNotifier{
 
   Product({required this.id, required this.title, required this.description, required this.price, required this.imageUrl,
       this.isFavorite=false});
-  void toggleFavoriteStatus(){
+  void _setFavValue(bool newValue){
+    isFavorite=newValue;
+    notifyListeners();
+  }
+  Future<void> toggleFavoriteStatus() async{
+    final oldStatus=isFavorite;
     isFavorite=!isFavorite;
     notifyListeners();
+    final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products/$id.json");
+    try{
+      final res=await http.patch(url,body: json.encode({
+        'isFavorite': isFavorite,
+      }));
+      if(res.statusCode>=400){
+        _setFavValue(oldStatus);
+      }
+    }catch(error){
+      _setFavValue(oldStatus);
+
+    }
+
+
   }
 }
