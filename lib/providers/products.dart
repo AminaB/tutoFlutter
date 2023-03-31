@@ -6,6 +6,17 @@ import 'product.dart';
 import 'package:http/http.dart'  as http;
 
 class Products with ChangeNotifier{
+    String authToken='';
+  void setToken(String token){
+    authToken=token;
+  }
+    void setItems(items){
+    if(items!=null){
+      _items=items;
+    }else{
+      _items=[];
+    }
+    }
   List<Product> _items=[
     // Product(
     //   id: 'p1',
@@ -40,7 +51,9 @@ class Products with ChangeNotifier{
     //   'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     // ),
   ];
-Product findById(String id){
+
+
+  Product findById(String id){
   return _items.firstWhere((element) => element.id==id);
 }
   List<Product> get favoritesItems =>
@@ -49,7 +62,8 @@ Product findById(String id){
   var _showFavoritesOnly=false;
 
   Future<void> fetchAndSetProducts() async{
-    final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json");
+    final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json?auth=$authToken");
+    print("object");
     try{
       final  response=await http.get(url);
       //print(json.decode(response.body));
@@ -59,8 +73,9 @@ Product findById(String id){
       }
       final List<Product> loadedProducts=[];
       extractedData.forEach((pId, pData) {
+        print(pData);
         loadedProducts.add(Product(
-          id: pId,
+          id: pId.toString(),
           title: pData['title'],
           description:pData['description'],
           price:pData['price'],
