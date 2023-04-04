@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +10,7 @@ class Auth with ChangeNotifier{
   late String _token;
   DateTime? _expiryDate;
   late String _userId;
+  Timer? _authTimer;
   bool get isAuth{
     return token!='' && token!=null;
   }
@@ -36,6 +39,7 @@ class Auth with ChangeNotifier{
       _token=responseData['idToken'];
       _userId=responseData['localId'];
       _expiryDate=DateTime.now().add(Duration(seconds: int.parse(responseData['expiresIn'])));
+      _autoLogout();
       notifyListeners();
     }catch(error){
       rethrow;
@@ -58,7 +62,17 @@ class Auth with ChangeNotifier{
     _token='';
     _expiryDate=null;
     _userId='';
+    if(_authTimer!=null){
+      _authTimer!.cancel();
+    }
     notifyListeners();
 
+  }
+  void _autoLogout(){
+    if(_authTimer!=null){
+      _authTimer!.cancel();
+    }
+   final timeToExpiry= _expiryDate?.difference(DateTime.now()).inSeconds;
+    _authTimer=Timer(Duration(seconds: timeToExpiry!), logout);
   }
 }
