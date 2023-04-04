@@ -29,3 +29,5 @@ flutter packages get : to get packages in pubsec.yaml
 # User Authentication 
 
 ## FutureBuilder can use to avoid creating stateful widget
+
+# Firebase (data storage, file storage, authent, push notifs, analytics, cloud function, ..)

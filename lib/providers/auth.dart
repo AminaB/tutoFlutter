@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tuto_flutter/models/http_exception.dart';
 
 class Auth with ChangeNotifier{
   late String _token;
@@ -33,7 +32,6 @@ class Auth with ChangeNotifier{
       }));
       final responseData=json.decode(response.body);
       if(responseData['error']!=null){
-        throw HttpException(responseData['error']['message']);
       }
       _token=responseData['idToken'];
       _userId=responseData['localId'];
