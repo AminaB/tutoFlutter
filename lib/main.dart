@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tuto_flutter/providers/auth.dart';
 import 'package:tuto_flutter/providers/cart.dart';
@@ -11,6 +10,7 @@ import 'package:tuto_flutter/screens/orders_screen.dart';
 import 'package:tuto_flutter/screens/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:tuto_flutter/screens/products_overview_screen.dart';
+import 'package:tuto_flutter/screens/splash_screen.dart';
 import 'package:tuto_flutter/screens/user_product_screen.dart';
 
 
@@ -71,7 +71,15 @@ class MyApp extends StatelessWidget {
         //   //   MaterialPageRoute(builder: (context) => CategoryMealsScreen(),);
         //   // }
         // },*/
-        home: auth.isAuth? ProductsOverviewScreen():AuthScreen(),
+        home: auth.isAuth
+            ? ProductsOverviewScreen()
+            :FutureBuilder(
+              future: auth.tryAutoLogin(),
+              builder: (ctx, authResultSnapshot) =>
+                authResultSnapshot.connectionState==ConnectionState.waiting
+                    ?const SplashScreen()
+                    :AuthScreen(),
+            ),
       ) ,)
     );
   }
