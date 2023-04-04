@@ -67,12 +67,13 @@ class Products with ChangeNotifier{
 
   var _showFavoritesOnly=false;
 
-  Future<void> fetchAndSetProducts() async{
-    var url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json?auth=$authToken");
+  Future<void> fetchAndSetProducts([bool filterByUser=false]) async{
+    final filterString=filterByUser? 'orderBy="creatorId"&equalTo="$userId"' :'';
+    var url=Uri.parse('https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json?auth=$authToken&$filterString');
     //print("object");
+
     try{
       final  response=await http.get(url);
-      //print(json.decode(response.body));
       final extractedData=json.decode(response.body) as Map<String, dynamic>;
       if(extractedData==null){
         return;
@@ -110,6 +111,7 @@ class Products with ChangeNotifier{
         'description': product.description,
         'price': product.price,
         'imageUrl': product.imageUrl,
+        'creatorId': userId
       }));
       final newP=Product(id: json.decode(response.body)['name'], title: product.title, description: product.description, price: product.price, imageUrl: product.imageUrl);
       _items.add(newP);
