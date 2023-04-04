@@ -36,6 +36,15 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (BuildContext ctx) =>Cart(),),
         ChangeNotifierProvider(create: (BuildContext ctx) =>Orders(),),
+        ChangeNotifierProxyProvider<Auth,Orders>(
+          update: (ctx, auth, previousProducts) =>Orders()
+            ..setToken(auth.token.toString())
+            ..setItems(previousProducts?.orders)
+          ,
+          create: (ctx) {
+            return Orders();
+          },
+        ),
       ],
       child: Consumer<Auth>(builder:(ctx, auth, child) =>MaterialApp(
         title: 'DeliMeals',
