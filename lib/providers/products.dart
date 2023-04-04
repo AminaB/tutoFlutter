@@ -7,9 +7,13 @@ import 'package:http/http.dart'  as http;
 
 class Products with ChangeNotifier{
     String authToken='';
+    String userId='';
   void setToken(String token){
     authToken=token;
   }
+    void setUserId(String id){
+      userId=id;
+    }
     void setItems(items){
     if(items!=null){
       _items=items;
@@ -17,6 +21,8 @@ class Products with ChangeNotifier{
       _items=[];
     }
     }
+
+
   List<Product> _items=[
     // Product(
     //   id: 'p1',
@@ -62,8 +68,8 @@ class Products with ChangeNotifier{
   var _showFavoritesOnly=false;
 
   Future<void> fetchAndSetProducts() async{
-    final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json?auth=$authToken");
-    print("object");
+    var url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json?auth=$authToken");
+    //print("object");
     try{
       final  response=await http.get(url);
       //print(json.decode(response.body));
@@ -71,6 +77,10 @@ class Products with ChangeNotifier{
       if(extractedData==null){
         return;
       }
+       url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/userFavorite/$userId.json?auth=$authToken");
+
+      final favoriteResponse=await http.get(url);
+      final favoriteData= json.decode(favoriteResponse.body);
       final List<Product> loadedProducts=[];
       extractedData.forEach((pId, pData) {
         print(pData);
@@ -80,7 +90,7 @@ class Products with ChangeNotifier{
           description:pData['description'],
           price:pData['price'],
           imageUrl: pData['imageUrl'],
-          isFavorite :pData['isFavorite']
+          isFavorite :favoriteData==null? false : favoriteData[pId]?? false
 
         ));
       });
@@ -100,7 +110,6 @@ class Products with ChangeNotifier{
         'description': product.description,
         'price': product.price,
         'imageUrl': product.imageUrl,
-        'isFavorite': product.isFavorite
       }));
       final newP=Product(id: json.decode(response.body)['name'], title: product.title, description: product.description, price: product.price, imageUrl: product.imageUrl);
       _items.add(newP);
