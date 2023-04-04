@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
           update: (ctx, auth, previousProducts) =>Orders()
             ..setToken(auth.token.toString())
             ..setItems(previousProducts?.orders)
+            ..setUserId(auth.userId)
           ,
           create: (ctx) {
             return Orders();
