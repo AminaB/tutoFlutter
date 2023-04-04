@@ -9,7 +9,7 @@ class Auth with ChangeNotifier{
   DateTime? _expiryDate;
   late String _userId;
   bool get isAuth{
-    return token!=null;
+    return token!='' && token!=null;
   }
   String? get token{
     if(_expiryDate!=null && _expiryDate!.isAfter(DateTime.now()) && _token!=null){
@@ -53,5 +53,12 @@ class Auth with ChangeNotifier{
     //final url =Uri.parse("hhttps://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key= AIzaSyAk68qMoW3ta7N5XecQPlfxu21-t6AesqA");
     //    final url=Uri.parse("https://flutter-update-14e05-default-rtdb.europe-west1.firebasedatabase.app/products.json");
     return _authenticate(email, password, "signInWithPassword");
+  }
+  logout(){
+    _token='';
+    _expiryDate=null;
+    _userId='';
+    notifyListeners();
+
   }
 }
