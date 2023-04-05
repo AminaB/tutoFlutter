@@ -36,7 +36,7 @@ class _AuthFormState extends State<AuthForm> {
               ElevatedButton(onPressed: (){
 
               },
-                  child: Text('Login')
+                  child: Text('Login', style: TextStyle(color: Colors.white),)
               ),
               TextButton(
                   onPressed: (){

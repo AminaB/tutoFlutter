@@ -15,6 +15,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              textStyle: MaterialStateProperty.resolveWith<TextStyle>((states) {
+                return TextStyle(color: Colors.pink);
+              }),
+              foregroundColor: MaterialStateProperty.resolveWith((states) {
+                return Color(0xff00a89b);
+              }),
+              shape: MaterialStateProperty.resolveWith<OutlinedBorder>((states) {
+                return RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                );
+              }),
+            ),
+          ),
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -24,7 +41,12 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.pink,
+            //brightness: Brightness.dark,
+
+        )
+            .copyWith(background: Colors.pink, secondary: Colors.deepPurple)
       ),
       home:  AuthScreen(),
     );
