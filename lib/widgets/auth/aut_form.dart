@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm(this.submitFn, {super.key});
-  final void Function (String email, String password,String userName, bool isLogin, BuildContext ctx) submitFn;
+  const AuthForm(this.submitFn, this.isLoading, {super.key});
+  final bool isLoading;
+  final void Function (String email, String password,String username, bool isLogin, BuildContext ctx) submitFn;
   @override
   State<AuthForm> createState() => _AuthFormState();
 }
@@ -11,14 +12,14 @@ class _AuthFormState extends State<AuthForm> {
   final _formKey=GlobalKey<FormState>();
   var _isLogin=true;
   var _userEmail='';
-  var _userName='';
+  var _username='';
   var _userPassword='';
   void _trySubmit(){
     final isValid=_formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if(isValid){
       _formKey.currentState!.save();
-      widget.submitFn(_userEmail,_userPassword,_userName, _isLogin,context);
+      widget.submitFn(_userEmail,_userPassword,_username, _isLogin,context);
     }
   }
   @override
@@ -54,7 +55,7 @@ class _AuthFormState extends State<AuthForm> {
                 },
                 decoration: const InputDecoration(labelText: 'Username'),
                 onSaved: (newValue) {
-                  _userName=newValue!;
+                  _username=newValue!;
                 },
               ),
               TextFormField(
@@ -73,18 +74,24 @@ class _AuthFormState extends State<AuthForm> {
                 },
               ),
               const SizedBox(height: 12,),
-              ElevatedButton(onPressed: _trySubmit,
-                  child: Text(_isLogin? 'Login' :'Sign Up', style: TextStyle(color: Colors.white),)
-              ),
-              TextButton(
-                  onPressed: (){
-                    setState(() {
-                      _isLogin=!_isLogin;
-                    });
+              if(widget.isLoading)
+                CircularProgressIndicator(),
+              if(!widget.isLoading)
+                ElevatedButton(onPressed: _trySubmit,
+                    child: Text(_isLogin? 'Login' :'Sign Up', style: TextStyle(color: Colors.white),)
+                ),
+              if(widget.isLoading)
+                CircularProgressIndicator(),
+              if(!widget.isLoading)
+                TextButton(
+                    onPressed: (){
+                      setState(() {
+                        _isLogin=!_isLogin;
+                      });
 
-                  },
-                  child:  Text(_isLogin?'create New Account': 'I already have an account')
-              )
+                    },
+                    child:  Text(_isLogin?'create New Account': 'I already have an account')
+                )
             ],
           ),
 
