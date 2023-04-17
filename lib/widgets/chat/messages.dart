@@ -24,13 +24,14 @@ class Messages extends StatelessWidget {
             return Center(child: CircularProgressIndicator(),);
           }
           final chatDocs=chatSnapshot.data!.docs;
+          print(chatDocs);
           return ListView.builder(
                   reverse: true,
                   itemCount: chatDocs.length,
                   itemBuilder: (ctx,index)=>MessageBubble(
                     chatDocs[index]['text'],
                     (chatDocs[index]['userId']==futureSnapshot.data!.uid),
-                    chatDocs[index]['userId'],
+                    chatDocs[index]['username'],
                     key: ValueKey(chatDocs[index].id),
                   ),
               );
